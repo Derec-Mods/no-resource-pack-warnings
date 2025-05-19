@@ -1,13 +1,12 @@
 package no.resource.pack.warnings.mixin.client;
 
+import net.minecraft.client.option.GameOptions;
+import net.minecraft.resource.ResourcePackCompatibility;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
-import net.minecraft.client.Options;
-import net.minecraft.server.packs.repository.PackCompatibility;
-
-@Mixin(Options.class)
+@Mixin(GameOptions.class)
 public class OptionsMixin {
 
 	@Redirect(
@@ -17,7 +16,7 @@ public class OptionsMixin {
 			target = "Lnet/minecraft/server/packs/repository/PackCompatibility;isCompatible()Z"
 		)
 	)
-	private boolean onUpdateResourcePacksRedirectIsCompatible(PackCompatibility compatibility) {
+	private boolean onUpdateResourcePacksRedirectIsCompatible(ResourcePackCompatibility compatibility) {
 		return true;
 	}
 
@@ -28,7 +27,7 @@ public class OptionsMixin {
 			target = "Lnet/minecraft/server/packs/repository/PackCompatibility;isCompatible()Z"
 		)
 	)
-	private boolean onLoadSelectedResourcePacksRedirectIsCompatible(PackCompatibility compatibility) {
+	private boolean onLoadSelectedResourcePacksRedirectIsCompatible(ResourcePackCompatibility compatibility) {
 		return true;
 	}
 }
